@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<title>{% block title %}All Contacts{% endblock %}</title>
+{% endblock %}
+
+{% block body %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+{% for i in all_contacts %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card mb-3 accordion" id="contactAccordion" style="width: 70rem;">
+            <div class="card-body" id="contactAccordionHeader">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapse{{loop.index}}" aria-expanded="true"
+                    aria-controls="collapse{{loop.index}}">
+                    <div class="row">
+                        <input type="hidden" value="{{i[1]}}">
+                        <div class="col-lg-3">
+                            <p><i class="fa fa-address-card m-2" aria-hidden="true"></i>{{ i[1] }}</p>
+                        </div>
+                        <div class="col-lg-3">
+                            <p><i class="fa fa-phone m-2" aria-hidden="true"></i>{{
+                                i[2] }}</p>
+                        </div>
+                        <div class="col-lg-3">
+                            <p><i class="fa fa-envelope m-2" aria-hidden="true"></i>{{ i[3] }}</p>
+                        </div>
+                        <div class="col-lg-3">
+                            <p><i class="fa fa-fax m-2" aria-hidden="true"></i>{{ i[4] }}</p>
+                        </div>
+                    </div>
+                </button>
+            </div>
+
+            <div id="collapse{{loop.index}}" class="accordion-collapse collapse"
+                aria-labelledby="contactAccordionHeader" data-bs-parent="#contactAccordion">
+                <div class="accordion-body">
+                    <a href="{{url_for('update_contact', Id=i[0] )}}"><button type="button"
+                            class="btn btn-outline-dark">Update
+                            Contact</button></a>
+                    <a href="{{url_for('delete_contact', Id=i[0] )}}"><button type="button"
+                            class="btn btn-outline-dark">Delete
+                            Contact</button></a>
+                    <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
+                        data-bs-target="#moreInformationModal">More Information
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- More Information Modal-->
+<div class="modal fade" id="moreInformationModal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLongTitle">Contact Information</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                This is more information
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<script type="text/javascript">
+    function selectId() {
+        let selectedid = document.querySelector('input').value;
+        alert(selectedid);
+    }
+</script>
+
+
+{% endblock %}

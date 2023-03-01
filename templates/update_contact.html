@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %} Update Contact {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-lg-6 mb-4 offset-lg-3">
+        <em>Update the contact details</em>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 offset-lg-3">
+        <div class="outer_border">
+            <form method="POST">
+                <div class="mb-3 p-2">
+                    <label for="contact_names" class="form-label">Names</label>
+                    <input type="text" class="form-control" id="update_contact_names" name="update_c_names"
+                        value="{{ name }}">
+                </div>
+                <div class="mb-3 p-2">
+                    <label for="contact_number" class="form-label">Phone Number</label>
+                    <input type="text" class="form-control" id="update_contact_number" name="update_c_number"
+                        value="{{ phone }}">
+                </div>
+                <div class="mb-3 p-2">
+                    <label for="email_address" class="form-label">Email address</label>
+                    <input type="text" class="form-control" id="update_email_address" name="update_c_email_address"
+                        value="{{ email }}">
+                </div>
+                <div class="mb-3 p-2">
+                    <label for="contact_fax" class="form-label">Fax</label>
+                    <input type="text" class="form-control" id="update_contact_fax" name="update_c_fax"
+                        value="{{ fax }}">
+                </div>
+                <button type="submit" class="btn btn-primary mb-3 mx-2">Update</button>
+            </form>
+        </div>
+    </div>
+</div>
+{{ p }}
+{% endblock %}
